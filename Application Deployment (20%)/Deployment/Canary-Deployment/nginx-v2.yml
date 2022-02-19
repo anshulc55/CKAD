@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment-1.1
+  labels:
+    deptype: canary
+    env: prod
+
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      deptype: canary
+  template:
+    metadata:
+      labels:
+        deptype: canary
+    spec:
+      containers:
+        - name: nginx
+          image: anshuldevops/magicalnginx:latest
+          ports:
+            - containerPort: 80

@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-caching-server
+  labels:
+    purpose: demonstrate-multi-container-pod
+spec:
+  containers:
+  - name: nginx-container1
+    image: nginx
+
+  - name: busybox-container2
+    image: busybox
+    command: 
+      - sleep
+      - "3600"

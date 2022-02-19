@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: countdown-job-ttl
+spec:
+  completions: 5
+  ttlSecondsAfterFinished: 10
+  template:
+    metadata:
+      name: countdown-pod
+    spec:
+      containers:
+        - name: counter
+          image: centos:7
+          command:
+            - "bin/bash"
+            - "-c"
+            - "for i in 9 8 7 6 5 4 3 2 1 ; do echo $i ; sleep 1 ; done"
+      restartPolicy: Never

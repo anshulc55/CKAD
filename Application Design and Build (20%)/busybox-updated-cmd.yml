@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox-updated
+  namespace: default
+spec:
+  containers:
+  - name: busybox-updated
+    image: busybox
+    command: 
+      - sleep
+      - "3600"
+    
+  restartPolicy: Always

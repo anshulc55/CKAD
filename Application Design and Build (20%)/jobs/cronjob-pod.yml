@@ -1,0 +1,19 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: cron-test-ttl
+spec:
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    spec:
+      ttlSecondsAfterFinished: 10
+      template:
+        spec:
+          containers:
+            - name: cron-test
+              image: busybox
+              args:
+                - /bin/sh
+                - -c
+                - date; echo Hello this is Cron test
+          restartPolicy: OnFailure

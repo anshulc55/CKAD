@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: canary-deployment
+
+spec:
+  type: LoadBalancer
+  selector:
+    deptype: canary
+  ports:
+    - port: 80
+      targetPort: 80

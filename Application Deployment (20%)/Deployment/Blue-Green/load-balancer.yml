@@ -1,0 +1,15 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: fnt-service
+  labels:
+    app: nginx-1.0
+    env: prod
+
+spec:
+  type: LoadBalancer
+  selector:
+    app: nginx-1.0
+  ports:
+    - port: 80
+      targetPort: 80

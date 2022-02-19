@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-deployment
+  labels:
+    app: redis
+
+spec:
+  replicas: 15
+  selector:
+    matchLabels:
+      app: redis
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 2
+  minReadySeconds: 10
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+        - name: redis-container
+          image: redis:6.0 #Upgrade to 6.0 --> 6.0.16 --> 6.2.6
