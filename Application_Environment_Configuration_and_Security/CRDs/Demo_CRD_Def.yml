@@ -1,0 +1,50 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: burgerstores.burgerking.com
+spec:
+  group: burgerking.com
+  names:
+    kind: BurgerStore
+    plural: burgerstores
+    listKind: BurgerStoreList
+    singular: burgerstore
+  scope: Namespaced
+  versions:
+  - name: v1
+    # Each version can be enabled/disabled by Served flag.
+    served: true
+    # One and only one version must be marked as the storage version.
+    storage: true
+    schema:
+      openAPIV3Schema:
+        type: object
+        properties:
+          spec:
+            type: object
+            properties:
+              owner:
+                type: string
+                description: The name of the owner of this Burger Store franchise
+              address:
+                type: string
+                description: The physical address of the Burger Store
+              currency:
+                type: string
+                description: The currency which this Burger Store accepts payments in
+              replicas:
+                type: integer
+                description: The number of instances of the Burger Store app to deploy
+    additionalPrinterColumns:
+      - name: Owner
+        jsonPath: .spec.owner
+        type: string
+      - name: Currency
+        jsonPath: .spec.currency
+        type: string
+      - name: Replicas
+        jsonPath: .spec.replicas
+        type: integer
+      - name: Age
+        jsonPath: .metadata.creationTimestamp
+        type: date

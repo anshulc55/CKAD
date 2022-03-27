@@ -1,0 +1,24 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: redis
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      name: redis
+  template:
+    metadata:
+      labels:
+        name: redis
+    spec:
+      containers:
+        - name: redis
+          image: redis:6.2
+          resources:
+            requests:
+              memory: 20Mi
+              cpu: 100m
+            limits:
+              memory: 40Mi
+              cpu: 1
