@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nodeport-service
+spec:
+  type: NodePort
+  selector:
+    env: prod
+  ports:
+      - port: 80
+        targetPort: 80
+        nodePort: 30107
